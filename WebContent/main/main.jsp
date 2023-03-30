@@ -23,7 +23,7 @@
 
 		function drawChart() {
 			var data = new google.visualization.DataTable();
-		      data.addColumn('string', 'id');
+		      data.addColumn('string', 'birth');
 		      data.addColumn('number', 'weight');
 			members.forEach(function(member, i) {
 				data.addRows([
