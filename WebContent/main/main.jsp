@@ -12,14 +12,48 @@
 	<style>
 	
 	</style>
+	<script type="text/javascript" 
+    src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 	<script>
-		$(document).ready(function(){
-			
-		});
+		var members =  JSON.parse('${members}');
+	
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawChart);
+
+		function drawChart() {
+			var data = new google.visualization.DataTable();
+		      data.addColumn('string', 'id');
+		      data.addColumn('number', 'weight');
+			members.forEach(function(member, i) {
+				data.addRows([
+					[member.birth, member.weight]
+				]);
+			});
+		  var options = {
+				  title: 'Member weight',
+			      curveType: 'function',
+			      legend: { position: 'bottom' }
+		  };
+
+		  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+	    chart.draw(data, options);
+  	}
 	</script>
 </head>
 <body>
 	<h1>1st Project(GIT TEST)</h1>
+	<table>
+		<c:forEach items="${members }" var="member">
+			<tr>
+				<td>${member.id }</td>
+				<td>${member.pw }</td>
+				<td>${member.name }</td>
+				<td>${member.birth }</td>
+				<td>${member.weight }</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<div id="curve_chart" style="width: 900px; height: 500px"></div>
 </body>
 </html>

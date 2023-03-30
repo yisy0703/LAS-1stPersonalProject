@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lec.las.service.MainService;
 import com.lec.las.service.Service;
 
 @WebServlet("*.do")
@@ -29,6 +30,8 @@ public class FrontController extends HttpServlet {
 		String viewPage = null;
 		Service service = null;
 		if(command.equals("/main.do")) {
+			service = new MainService();
+			service.execute(request, response);
 			viewPage = "main/main.jsp"; // 새창
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
